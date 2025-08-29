@@ -1,13 +1,13 @@
 import { Sequelize } from 'sequelize';
 
 const db = new Sequelize(
-  process.env.DBNAME ? process.env.DBNAME : 'todo',
-  process.env.DBUSER ? process.env.DBUSER : 'root',
-  process.env.DBPASSWORD ? process.env.DBPASSWORD : '',
+  process.env.DBNAME ?? 'heliconia',
+  process.env.DBUSER ?? 'heliconia_user',
+  process.env.DBPASSWORD ?? '1234',
   {
     host: process.env.DBHOST ? process.env.DBHOST : 'localhost',
-    port: process.env.DBPORT ? Number(process.env.DBPORT) : 3306,
-    dialect: 'mysql',
+    port: Number(process.env.DBPORT) ?? 5432,
+    dialect: 'postgres',
     logging: false,
   }
 );
@@ -16,10 +16,10 @@ console.log('Stating connection with database: ', process.env.DBNAME);
 
 db.authenticate()
   .then(() => {
-    console.log('DB connection has been established succesfully');
+    console.log('✅ DB connection has been established succesfully');
   })
   .catch((error) => {
-    console.log('Unable to connecto to DB: ', error);
+    console.log('❌ Unable to connecto to DB: ', error);
   });
 
 export default db;
