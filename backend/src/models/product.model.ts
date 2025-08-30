@@ -17,7 +17,8 @@ export class Product extends Model {
   declare description: string;
   declare price: number;
   declare img: string;
-  declare has_options: boolean;
+  declare hasOptions: boolean;
+  declare deleted: boolean;
 
   declare kitchenId: ForeignKey<Kitchen['id']>;
   declare kitchen?: NonAttribute<Kitchen>;
@@ -36,7 +37,8 @@ Product.init(
     description: DataTypes.STRING(500),
     price: DataTypes.INTEGER,
     img: DataTypes.STRING(200),
-    has_options: DataTypes.BOOLEAN,
+    hasOptions: DataTypes.BOOLEAN,
+    deleted: DataTypes.BOOLEAN,
   },
   { sequelize: db, tableName: 'product' }
 );

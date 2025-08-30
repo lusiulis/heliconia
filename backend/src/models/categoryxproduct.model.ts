@@ -27,12 +27,14 @@ CategoryXProduct.init(
 
 Product.belongsToMany(Category, {
   through: CategoryXProduct,
-  foreignKey: "productId",
-  otherKey: "categoryId",
+  foreignKey: 'productId',
+  otherKey: 'categoryId',
+  onDelete: 'CASCADE',
 });
 
 Category.belongsToMany(Product, {
   through: CategoryXProduct,
-  foreignKey: "categoryId",
-  otherKey: "productId",
+  foreignKey: 'categoryId',
+  otherKey: 'productId',
+  onDelete: 'CASCADE',
 });

@@ -7,9 +7,10 @@ import '../models/kitchen.model';
 import '../models/option.model';
 import '../models/order.model';
 import '../models/product.model';
+import '../models/section.model';
 
 import db from './database.config';
 
-export const init = () => db.sync();
+export const init = () => db.sync({ alter: true });
 
 export default init;

@@ -1,13 +1,21 @@
-import { CreationOptional, DataTypes, Model, NonAttribute } from 'sequelize';
+import {
+  CreationOptional,
+  DataTypes,
+  ForeignKey,
+  Model,
+  NonAttribute,
+} from 'sequelize';
 import db from '../config/database.config';
 import { Product } from './product.model';
 import { v4 } from 'uuid';
+import { Section } from './section.model';
 
 export class Category extends Model {
   declare id: CreationOptional<string>;
   declare name: string;
 
-  declare products?: NonAttribute<Product[]>
+  declare products?: NonAttribute<Product[]>;
+  declare sectionId: ForeignKey<Section['id']>;
 }
 
 Category.init(
@@ -26,4 +34,4 @@ Category.init(
 
 Category.beforeCreate((event) => {
   event.id = v4();
-})
+});

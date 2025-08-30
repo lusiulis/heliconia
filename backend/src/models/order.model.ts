@@ -17,7 +17,7 @@ Order.init(
       type: DataTypes.STRING(38),
       primaryKey: true,
     },
-    table: DataTypes.INTEGER({ length: 2 }),
+    table: DataTypes.INTEGER,
     waiter: DataTypes.STRING(100),
   },
   {
