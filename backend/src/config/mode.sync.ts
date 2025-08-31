@@ -8,6 +8,7 @@ import '../models/option.model';
 import '../models/order.model';
 import '../models/product.model';
 import '../models/section.model';
+import '../models/device.model';
 
 import db from './database.config';
 

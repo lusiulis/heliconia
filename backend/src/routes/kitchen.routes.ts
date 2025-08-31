@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import HandleToken from '../middlewares/handleToken';
+import { HandleAdminToken, HandleToken } from '../middlewares/handleToken';
 import { asyncErrorHandler } from '../middlewares/handleError';
 import {
   createKitchen,
@@ -14,7 +14,7 @@ import HttpValidator from '../validators';
 
 const kitchenRouter = Router();
 
-kitchenRouter.get('/kitchens', HandleToken, asyncErrorHandler(getKitchens));
+kitchenRouter.get('/kitchens', HandleToken, HandleAdminToken, asyncErrorHandler(getKitchens));
 kitchenRouter.get(
   '/kitchens/:id',
   HttpValidator.checkIdParam,
@@ -27,6 +27,7 @@ kitchenRouter.post(
   KitchenHttpValidator.checkCreateKitchen,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(createKitchen)
 );
 kitchenRouter.put(
@@ -34,6 +35,7 @@ kitchenRouter.put(
   KitchenHttpValidator.checkUpdateKitchen,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(updateKitchen)
 );
 kitchenRouter.delete(
@@ -41,6 +43,7 @@ kitchenRouter.delete(
   HttpValidator.checkIdParam,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(deleteKitchen)
 );
 

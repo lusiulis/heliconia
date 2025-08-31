@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import HandleToken from '../middlewares/handleToken';
+import { HandleAdminToken, HandleToken } from '../middlewares/handleToken';
 import { asyncErrorHandler } from '../middlewares/handleError';
 import {
   createSection,
@@ -29,6 +29,7 @@ sectionRouter.post(
   SectionHttpValidator.checkCreateSection,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(createSection)
 );
 
@@ -37,6 +38,7 @@ sectionRouter.put(
   SectionHttpValidator.checkUpdateSection,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(updateSection)
 );
 
@@ -45,6 +47,7 @@ sectionRouter.delete(
   HttpValidator.checkIdParam,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(deleteSection)
 );
 

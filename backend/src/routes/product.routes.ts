@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import HandleToken from '../middlewares/handleToken';
+import { HandleAdminToken, HandleToken } from '../middlewares/handleToken';
 import { asyncErrorHandler } from '../middlewares/handleError';
 import ProductHttpValidator from '../validators/product.validator';
 import HandleValidationError from '../middlewares/handleValidationError';
@@ -12,10 +12,15 @@ import {
 
 const productRouter = Router();
 
-productRouter.get('/products', HandleToken, asyncErrorHandler(getProducts));
+productRouter.get(
+  '/products',
+  HandleToken,
+  asyncErrorHandler(getProducts)
+);
 productRouter.get(
   '/products/deleted',
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(getDeletedProducts)
 );
 
@@ -24,6 +29,7 @@ productRouter.post(
   ProductHttpValidator.checkCreateProduct,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(createProduct)
 );
 
@@ -32,6 +38,7 @@ productRouter.put(
   ProductHttpValidator.checkUpdateProduct,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(updateProduct)
 );
 

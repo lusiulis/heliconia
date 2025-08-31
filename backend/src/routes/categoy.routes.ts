@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import HandleToken from '../middlewares/handleToken';
+import { HandleAdminToken, HandleToken } from '../middlewares/handleToken';
 import { asyncErrorHandler } from '../middlewares/handleError';
 import CategoryHttpValidator from '../validators/category.validator';
 import HandleValidationError from '../middlewares/handleValidationError';
@@ -24,6 +24,7 @@ categoryRouter.post(
   CategoryHttpValidator.checkCreateCategory,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(createCategory)
 );
 
@@ -32,6 +33,7 @@ categoryRouter.put(
   CategoryHttpValidator.checkUpdateCategory,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(updateCategory)
 );
 
@@ -40,6 +42,7 @@ categoryRouter.delete(
   HttpValidator.checkIdParam,
   HandleValidationError,
   HandleToken,
+  HandleAdminToken,
   asyncErrorHandler(deleteCategory)
 );
 
