@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { HandleAdminToken, HandleToken } from '../middlewares/handleToken';
+import HandleToken from '../middlewares/handleToken';
 import { asyncErrorHandler } from '../middlewares/handleError';
 import {
   createKitchen,
@@ -14,36 +14,37 @@ import HttpValidator from '../validators';
 
 const kitchenRouter = Router();
 
-kitchenRouter.get('/kitchens', HandleToken, HandleAdminToken, asyncErrorHandler(getKitchens));
+kitchenRouter.get(
+  '/kitchens',
+  HandleToken('ADMIN'),
+  asyncErrorHandler(getKitchens)
+);
 kitchenRouter.get(
   '/kitchens/:id',
   HttpValidator.checkIdParam,
   HandleValidationError,
-  HandleToken,
+  HandleToken('KITCHEN'),
   asyncErrorHandler(getKitchen)
 );
 kitchenRouter.post(
   '/kitchens',
   KitchenHttpValidator.checkCreateKitchen,
   HandleValidationError,
-  HandleToken,
-  HandleAdminToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(createKitchen)
 );
 kitchenRouter.put(
   '/kitchens/:id',
   KitchenHttpValidator.checkUpdateKitchen,
   HandleValidationError,
-  HandleToken,
-  HandleAdminToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(updateKitchen)
 );
 kitchenRouter.delete(
   '/kitchens/:id',
   HttpValidator.checkIdParam,
   HandleValidationError,
-  HandleToken,
-  HandleAdminToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(deleteKitchen)
 );
 

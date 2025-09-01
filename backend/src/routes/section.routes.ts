@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { HandleAdminToken, HandleToken } from '../middlewares/handleToken';
+import HandleToken from '../middlewares/handleToken';
 import { asyncErrorHandler } from '../middlewares/handleError';
 import {
   createSection,
@@ -14,13 +14,17 @@ import HttpValidator from '../validators';
 
 const sectionRouter = Router();
 
-sectionRouter.get('/sections', HandleToken, asyncErrorHandler(getSections));
+sectionRouter.get(
+  '/sections',
+  HandleToken('WAITER'),
+  asyncErrorHandler(getSections)
+);
 
 sectionRouter.get(
   '/sections/:id',
   HttpValidator.checkIdParam,
   HandleValidationError,
-  HandleToken,
+  HandleToken('WAITER'),
   asyncErrorHandler(getSection)
 );
 
@@ -28,8 +32,7 @@ sectionRouter.post(
   '/sections',
   SectionHttpValidator.checkCreateSection,
   HandleValidationError,
-  HandleToken,
-  HandleAdminToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(createSection)
 );
 
@@ -37,8 +40,7 @@ sectionRouter.put(
   '/sections/:id',
   SectionHttpValidator.checkUpdateSection,
   HandleValidationError,
-  HandleToken,
-  HandleAdminToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(updateSection)
 );
 
@@ -46,8 +48,7 @@ sectionRouter.delete(
   '/sections/:id',
   HttpValidator.checkIdParam,
   HandleValidationError,
-  HandleToken,
-  HandleAdminToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(deleteSection)
 );
 

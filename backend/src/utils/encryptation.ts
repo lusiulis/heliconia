@@ -6,6 +6,10 @@ export const jwt_secret = process.env.JWT_SECRET
   ? process.env.JWT_SECRET
   : 'secret_jwt';
 
+export const jwt_refresh_secret = process.env.JWT_REFRESH_SECRET
+  ? process.env.JWT_REFRESH_SECRET
+  : 'secret_refresh_jwt';
+
 export const encrypt = async (password: string) => {
   const salt = await genSalt(saltRounds);
   return await hash(password, salt);
