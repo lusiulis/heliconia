@@ -14,13 +14,17 @@ import HttpValidator from '../validators';
 
 const sectionRouter = Router();
 
-sectionRouter.get('/sections', HandleToken, asyncErrorHandler(getSections));
+sectionRouter.get(
+  '/sections',
+  HandleToken('WAITER'),
+  asyncErrorHandler(getSections)
+);
 
 sectionRouter.get(
   '/sections/:id',
   HttpValidator.checkIdParam,
   HandleValidationError,
-  HandleToken,
+  HandleToken('WAITER'),
   asyncErrorHandler(getSection)
 );
 
@@ -28,7 +32,7 @@ sectionRouter.post(
   '/sections',
   SectionHttpValidator.checkCreateSection,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(createSection)
 );
 
@@ -36,7 +40,7 @@ sectionRouter.put(
   '/sections/:id',
   SectionHttpValidator.checkUpdateSection,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(updateSection)
 );
 
@@ -44,7 +48,7 @@ sectionRouter.delete(
   '/sections/:id',
   HttpValidator.checkIdParam,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(deleteSection)
 );
 

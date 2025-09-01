@@ -88,7 +88,7 @@ const ProductHttpValidator = {
     body('deleted')
       .optional()
       .isBoolean()
-      .withMessage('The "hasOptions" value must be a boolean'),
+      .withMessage('The "deleted" value must be a boolean'),
   ],
 };
 

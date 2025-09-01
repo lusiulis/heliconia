@@ -15,7 +15,7 @@ const categoryRouter = Router();
 
 categoryRouter.get(
   '/categories',
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(getCategories)
 );
 
@@ -23,7 +23,7 @@ categoryRouter.post(
   '/categories',
   CategoryHttpValidator.checkCreateCategory,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(createCategory)
 );
 
@@ -31,7 +31,7 @@ categoryRouter.put(
   '/categories/:id',
   CategoryHttpValidator.checkUpdateCategory,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(updateCategory)
 );
 
@@ -39,7 +39,7 @@ categoryRouter.delete(
   '/categories/:id',
   HttpValidator.checkIdParam,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(deleteCategory)
 );
 

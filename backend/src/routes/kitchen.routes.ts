@@ -14,33 +14,37 @@ import HttpValidator from '../validators';
 
 const kitchenRouter = Router();
 
-kitchenRouter.get('/kitchens', HandleToken, asyncErrorHandler(getKitchens));
+kitchenRouter.get(
+  '/kitchens',
+  HandleToken('ADMIN'),
+  asyncErrorHandler(getKitchens)
+);
 kitchenRouter.get(
   '/kitchens/:id',
   HttpValidator.checkIdParam,
   HandleValidationError,
-  HandleToken,
+  HandleToken('KITCHEN'),
   asyncErrorHandler(getKitchen)
 );
 kitchenRouter.post(
   '/kitchens',
   KitchenHttpValidator.checkCreateKitchen,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(createKitchen)
 );
 kitchenRouter.put(
   '/kitchens/:id',
   KitchenHttpValidator.checkUpdateKitchen,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(updateKitchen)
 );
 kitchenRouter.delete(
   '/kitchens/:id',
   HttpValidator.checkIdParam,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(deleteKitchen)
 );
 

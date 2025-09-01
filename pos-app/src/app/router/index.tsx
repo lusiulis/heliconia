@@ -7,8 +7,14 @@ import CheckOut from "@pages/checkout";
 import Error from "@pages/error";
 import Kitchen from "@pages/kitchen";
 import Waiter from "@pages/waiter";
+import LogIn from "@pages/admin/login";
 
 const appRouter = createBrowserRouter([
+  {
+    element: <LogIn />,
+    errorElement: <Error />,
+    path: "/login",
+  },
   {
     element: <Layout />,
     errorElement: <Error />,

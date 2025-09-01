@@ -2,6 +2,7 @@ import { CreationOptional, DataTypes, Model, NonAttribute } from 'sequelize';
 import db from '../config/database.config';
 import { Product } from './product.model';
 import { v4 } from 'uuid';
+import { Device } from './device.model';
 
 export class Kitchen extends Model {
   declare id: CreationOptional<string>;
@@ -27,7 +28,9 @@ Kitchen.init(
 Product.belongsTo(Kitchen, { foreignKey: 'kitchenId' });
 Kitchen.hasMany(Product, { foreignKey: 'kitchenId' });
 
+Device.belongsTo(Kitchen, { foreignKey: 'kitchenId' });
+Kitchen.hasMany(Device, { foreignKey: 'kitchenId' });
+
 Kitchen.beforeCreate((event) => {
   event.id = v4();
-})
-
+});

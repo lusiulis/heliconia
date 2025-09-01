@@ -12,10 +12,14 @@ import {
 
 const productRouter = Router();
 
-productRouter.get('/products', HandleToken, asyncErrorHandler(getProducts));
+productRouter.get(
+  '/products',
+  HandleToken('WAITER'),
+  asyncErrorHandler(getProducts)
+);
 productRouter.get(
   '/products/deleted',
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(getDeletedProducts)
 );
 
@@ -23,7 +27,7 @@ productRouter.post(
   '/products',
   ProductHttpValidator.checkCreateProduct,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(createProduct)
 );
 
@@ -31,7 +35,7 @@ productRouter.put(
   '/products/:id',
   ProductHttpValidator.checkUpdateProduct,
   HandleValidationError,
-  HandleToken,
+  HandleToken('ADMIN'),
   asyncErrorHandler(updateProduct)
 );
 
