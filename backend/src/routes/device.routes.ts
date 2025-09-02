@@ -5,6 +5,7 @@ import {
   accessDevice,
   getDeletedDevices,
   getDevices,
+  refreshToken,
   registerDevice,
   updateDevice,
 } from '../controllers/device.controller';
@@ -14,13 +15,13 @@ import HandleValidationError from '../middlewares/handleValidationError';
 const deviceRouter = Router();
 
 deviceRouter.post(
-  '/device/access',
+  '/devices/access',
   DeviceHttpValidator.checkAccessDevice,
   HandleValidationError,
   asyncErrorHandler(accessDevice)
 );
 
-//refresh tokens
+deviceRouter.post('/devices/refresh', asyncErrorHandler(refreshToken));
 
 deviceRouter.get(
   '/devices',

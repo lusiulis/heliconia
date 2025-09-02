@@ -17,6 +17,17 @@ const DeviceHttpValidator = {
       .isUUID(4)
       .withMessage('The "id" param must be in UUID v4 format'),
   ],
+  checkRefreshDeviceToken: [
+    body('role')
+      .notEmpty()
+      .withMessage('The "role" value must not be empty')
+      .isIn(['KITCHEN', 'CHECKOUT', 'WAITER'])
+      .withMessage('The "role" value must be KITCHEN, CHECKOUT or WAITER'),
+    body('kitchenId')
+      .optional()
+      .isUUID(4)
+      .withMessage('The "kitchenId" param must be in UUID v4 format'),
+  ],
   checkRegisterDevice: [
     body('secret')
       .notEmpty()
@@ -39,10 +50,12 @@ const DeviceHttpValidator = {
     body('role')
       .notEmpty()
       .withMessage('The "role" value must not be empty')
-      .isIn(['ADMIN', 'KITCHEN', 'CHECKOUT', 'WAITER'])
-      .withMessage(
-        'The "role" value must be ADMIN, KITCHEN, CHECKOUT or WAITER'
-      ),
+      .isIn(['KITCHEN', 'CHECKOUT', 'WAITER'])
+      .withMessage('The "role" value must be KITCHEN, CHECKOUT or WAITER'),
+    body('kitchenId')
+      .optional()
+      .isUUID(4)
+      .withMessage('The "kitchenId" param must be in UUID v4 format'),
   ],
   checkUpdateDevice: [
     param('id')
@@ -74,6 +87,10 @@ const DeviceHttpValidator = {
       .optional()
       .isBoolean()
       .withMessage('The "deleted" value must be a boolean'),
+    body('kitchenId')
+      .optional()
+      .isUUID(4)
+      .withMessage('The "kitchenId" param must be in UUID v4 format'),
   ],
 };
 
