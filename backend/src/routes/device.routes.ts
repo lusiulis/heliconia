@@ -21,7 +21,12 @@ deviceRouter.post(
   asyncErrorHandler(accessDevice)
 );
 
-deviceRouter.post('/devices/refresh', asyncErrorHandler(refreshToken));
+deviceRouter.post(
+  '/devices/refresh',
+  DeviceHttpValidator.checkRefreshDeviceToken,
+  HandleValidationError,
+  asyncErrorHandler(refreshToken)
+);
 
 deviceRouter.get(
   '/devices',
