@@ -1,8 +1,9 @@
 .overall {
-    background-color: vars.$gray-base;
     height: 100dvh;
-    
+    display: flex;
+
     .container {
-        
+        width: 100%;
+        background-color: vars.$gray-base;
     }
 }

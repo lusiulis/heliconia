@@ -8,6 +8,8 @@ import Error from "@pages/error";
 import Kitchen from "@pages/kitchen";
 import Waiter from "@pages/waiter";
 import LogIn from "@pages/admin/login";
+import Devices from "@pages/admin/devices";
+import Orders from "@pages/admin/orders";
 
 const appRouter = createBrowserRouter([
   {
@@ -21,7 +23,7 @@ const appRouter = createBrowserRouter([
     path: '/',
     children: [
       {
-        path: '/',
+        path: '/kitchens',
         element: <Kitchens />
       },
       {
@@ -31,6 +33,14 @@ const appRouter = createBrowserRouter([
       {
         path: '/products',
         element: <Products />
+      },
+      {
+        path: '/devices',
+        element: <Devices />
+      },
+      {
+        path: '/',
+        element: <Orders />
       }
     ]
   },
