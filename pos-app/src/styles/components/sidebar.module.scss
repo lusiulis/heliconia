@@ -1,7 +1,23 @@
 .overall {
   height: 100dvh;
-  width: 200px;
-  position: fixed;
-  background-color: white;
-  box-shadow: 4px 0px 0 0 #0000001c;
+  width: 30vw;
+  min-width: 200px;
+  max-width: 400px;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.938);
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .link {
+    text-decoration: none;
+    color: white;
+
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 50px;
+    }
+  }
 }
