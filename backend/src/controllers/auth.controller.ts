@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { User } from '../models/user.model';
 import {
   compareEncyrpt,
+  encrypt,
   jwt_refresh_secret,
   jwt_secret,
 } from '../utils/encryptation';
@@ -75,6 +76,20 @@ const refreshToken = async (req: Request, res: Response) => {
   }
 };
 
-const updateUser = async (req: Request, res: Response) => {};
+const updateUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = await User.findOne({ where: { id } });
+  if (!user) return res.status(404).json({ msg: 'No user found' });
+
+  const { username, password } = req.body;
+  if (username) user.username = username;
+  if (password) user.password = await encrypt(password);
+
+  user.save();
+  res.status(200).json({
+    msg: 'User updated successfully',
+    user,
+  });
+};
 
 export { login, refreshToken, updateUser };

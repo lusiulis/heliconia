@@ -8,7 +8,7 @@ const HandleToken =
       const adminToken = req.cookies.admin_token;
       const token =
         role === 'KITCHEN'
-          ? req.cookies[`kitchen_token_${req.params.id}`]
+          ? req.cookies[`kitchen_${req.params.id}_token`]
           : role === 'WAITER'
           ? req.cookies.waiter_token
           : req.cookies.checkout_token;
